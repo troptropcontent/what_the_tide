@@ -1,1 +1,8 @@
 **/.env
+credentials/**
+
+config/ports.json
+
+**.db
+
+tmp/**/*

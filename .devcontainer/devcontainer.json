@@ -8,5 +8,15 @@
 	"features": {
 		"ghcr.io/devcontainers/features/node:1": {}
 	},
-	"postCreateCommand": "bash .devcontainer/scripts/postCreateCommand.sh"
+	"postCreateCommand": "bash .devcontainer/scripts/postCreateCommand.sh",
+	"forwardPorts": [
+		8080
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"mtxr.sqltools"
+			]
+		}
+	}
 }

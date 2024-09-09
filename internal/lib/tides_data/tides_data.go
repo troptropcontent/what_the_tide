@@ -1,4 +1,4 @@
-package tides
+package tides_data
 
 import (
 	"fmt"
@@ -9,16 +9,26 @@ import (
 	"time"
 
 	"github.com/gocolly/colly/v2"
+	"github.com/troptropcontent/what_the_tide/internal/models"
 )
 
-type Tide struct {
-	Time  time.Time
-	High  bool
-	Level int
+var frenchMonths = []string{
+	"Janvier",
+	"Février",
+	"Mars",
+	"Avril",
+	"Mai",
+	"Juin",
+	"Juillet",
+	"Août",
+	"Septembre",
+	"Octobre",
+	"Novembre",
+	"Décembre",
 }
 
-func Get(date time.Time) (tides []Tide, err error) {
-	parsedTides := map[string]Tide{}
+func Get(date time.Time, portId int, tides *[]models.Tide) (err error) {
+	parsedTides := map[string]models.Tide{}
 	var correctReportDate *bool
 
 	c := colly.NewCollector(
@@ -44,7 +54,7 @@ func Get(date time.Time) (tides []Tide, err error) {
 	})
 
 	c.OnHTML("#MareeEnteteJour", func(e *colly.HTMLElement) {
-		expectedReportDate := fmt.Sprintf("%d %s %d", date.Day(), Months[date.Month()-1], date.Year())
+		expectedReportDate := fmt.Sprintf("%d %s %d", date.Day(), frenchMonths[date.Month()-1], date.Year())
 		r := strings.Contains(e.DOM.Text(), expectedReportDate)
 		correctReportDate = &r
 	})
@@ -60,8 +70,9 @@ func Get(date time.Time) (tides []Tide, err error) {
 		hoursInt, _ := strconv.Atoi(hoursString)
 		minutesString := timeMatches[2]
 		minutesInt, _ := strconv.Atoi(minutesString)
-		tideTime := time.Date(date.Year(), date.Month(), date.Day(), hoursInt, minutesInt, 0, 0, date.Location())
-		high := timeMatches[3] == "b"
+		tideTimeInLocalTime := time.Date(date.Year(), date.Month(), date.Day(), hoursInt, minutesInt, 0, 0, date.Location())
+		tideTimeUtc := tideTimeInLocalTime.UTC()
+		high := timeMatches[3] != "b"
 
 		levelAttr, _ := e.DOM.Attr("data-ht")
 		levelRegext := regexp.MustCompile(`(\d{1,2}),(\d{1,2})m`)
@@ -74,28 +85,29 @@ func Get(date time.Time) (tides []Tide, err error) {
 		levelCentimeters := levelMatches[2]
 		levelInCentimeters, _ := strconv.Atoi(levelMeters + levelCentimeters)
 
-		tide := Tide{
-			Time:  tideTime,
-			High:  high,
-			Level: levelInCentimeters,
+		tide := models.Tide{
+			PortId: portId,
+			Time:   tideTimeUtc,
+			High:   high,
+			Level:  levelInCentimeters,
 		}
 
 		_, tideAlreadyRegistered := parsedTides[hoursString+minutesString]
 
 		if !tideAlreadyRegistered {
 			parsedTides[hoursString+minutesString] = tide
-			tides = append(tides, tide)
+			*tides = append(*tides, tide)
 		}
 	})
 
 	base_url := os.Getenv("TIDE_WEBSITE_BASE_URL")
-	url := fmt.Sprintf("%v/%d?d=%s", base_url, Ports.Biarritz, date.Format("20060102"))
+	url := fmt.Sprintf("%v/%d?d=%s", base_url, portId, date.Format("20060102"))
 
 	c.Visit(url)
 
 	if *correctReportDate {
-		return tides, nil
+		return nil
 	}
 
-	return []Tide{}, err
+	return err
 }

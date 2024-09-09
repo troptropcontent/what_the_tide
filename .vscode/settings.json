@@ -1,0 +1,11 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "what_the_tide",
+            "database": "${workspaceFolder:what_the_tide}/database/database.db"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}
