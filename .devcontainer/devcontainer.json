@@ -15,7 +15,9 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"mtxr.sqltools"
+				"mtxr.sqltools",
+				"GitHub.vscode-pull-request-github",
+				"mtxr.sqltools-driver-sqlite"
 			]
 		}
 	}
