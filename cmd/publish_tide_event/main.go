@@ -32,6 +32,9 @@ func publishTideEvent(tide *models.Tide, srv *calendar.Service, portsConfig *mod
 	}
 	eventName := fmt.Sprintf("%s - %s", baseName, tide.Time.In(loc).Format(time.Kitchen))
 	eventDescription := fmt.Sprintf("%s point : %.2f m", baseDescription, float32(tide.Level)/float32(100.0))
+	if tide.Coef != nil {
+		eventDescription = fmt.Sprintf("%s\nCoefficient: %d", eventDescription, *tide.Coef)
+	}
 	event := &calendar.Event{
 		Summary:     eventName,
 		Location:    port.Name,
