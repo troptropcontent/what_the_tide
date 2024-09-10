@@ -34,9 +34,25 @@ func main() {
 	portConfig.LoadFromJson(config.Root() + "/" + models.PortsConfigFile)
 
 	// Save each new tides to the database
+	tides := []models.Tide{}
 	for _, port := range portConfig.Ports {
-		tides := []models.Tide{}
-		tides_data.Get(date, port.Id, &tides)
-		database.DB.Create(tides)
+		extract := tides_data.ExtractFromWeb{
+			Date:   date,
+			PortId: port.Id,
+		}
+
+		extract.Load()
+
+		for _, tide_from_web := range extract.Tides {
+			tides = append(tides, models.Tide{
+				Time:   extract.Date.AddDate(0, 0, tide_from_web.DaysOffset).Add(tide_from_web.Time).UTC(),
+				PortId: port.Id,
+				High:   tide_from_web.High,
+				Level:  tide_from_web.Level,
+				Coef:   tide_from_web.Coef,
+			})
+		}
 	}
+
+	database.DB.Save(&tides)
 }
