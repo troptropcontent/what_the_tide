@@ -72,7 +72,7 @@ func main() {
 
 	// Load all unpublished tides
 	unpublishedTides := []models.Tide{}
-	database.DB.Where(&models.Tide{IsPublished: false}).Find(&unpublishedTides)
+	database.DB.Where(map[string]interface{}{"is_published": false}).Find(&unpublishedTides)
 
 	for _, unpublishedTide := range unpublishedTides {
 		publishTideEvent(&unpublishedTide, calendarService, &portConfig)
