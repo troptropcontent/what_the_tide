@@ -13,12 +13,15 @@ servers:
   web:
     hosts:
       - 51.68.196.119
-    port: 0001:0001
+    port: 3001:3001
     labels:
       traefik.http.routers.vefaa.entrypoints: websecure
       traefik.http.routers.vefaa.rule: Host(`what-the-tide.thepocman.com`)
       traefik.http.routers.vefaa.tls: "true"
       traefik.http.routers.vefaa.tls.certresolver: letsencrypt
+    healthcheck:
+      path: /up
+      port: 3001
 
 # Credentials for your image host.
 registry:
