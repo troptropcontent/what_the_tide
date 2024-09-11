@@ -3,7 +3,8 @@ service: what-the-tide
 
 # Name of the container image.
 image: troptropcontent/what-the-tide
-
+builder:
+  multiarch: false
 volumes:
   - "database:/app/database"
 
@@ -11,10 +12,11 @@ volumes:
 servers:
   web:
     hosts:
-      - 51.83.33.169
+      - 51.68.196.119
+    port: 0001:0001
     labels:
       traefik.http.routers.vefaa.entrypoints: websecure
-      traefik.http.routers.vefaa.rule: Host(`what_the_tide.thepocman.com`)
+      traefik.http.routers.vefaa.rule: Host(`what-the-tide.thepocman.com`)
       traefik.http.routers.vefaa.tls: "true"
       traefik.http.routers.vefaa.tls.certresolver: letsencrypt
 

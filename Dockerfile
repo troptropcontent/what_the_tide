@@ -12,5 +12,5 @@ ENV GO_ENV=production
 
 RUN go build -o /app/web cmd/web/main.go
 
-EXPOSE 3000
+EXPOSE 0001
 CMD ["/app/web"]
