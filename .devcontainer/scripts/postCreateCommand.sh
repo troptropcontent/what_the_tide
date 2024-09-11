@@ -3,3 +3,5 @@ git config --global user.name $GIT_USER
 git config --global init.defaultBranch main
 git config --global pull.rebase false
 git config --global push.autoSetupRemote true
+
+gem install kamal
