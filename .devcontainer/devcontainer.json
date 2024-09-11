@@ -17,7 +17,8 @@
 			"extensions": [
 				"mtxr.sqltools",
 				"GitHub.vscode-pull-request-github",
-				"mtxr.sqltools-driver-sqlite"
+				"mtxr.sqltools-driver-sqlite",
+				"esbenp.prettier-vscode"
 			]
 		}
 	}
