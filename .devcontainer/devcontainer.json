@@ -1,25 +1,25 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/go-postgres
 {
-	"name": "WhatTheTide",
-	"dockerComposeFile": "docker-compose.yml",
-	"service": "app",
-	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-	"features": {
-		"ghcr.io/devcontainers/features/node:1": {}
-	},
-	"postCreateCommand": "bash .devcontainer/scripts/postCreateCommand.sh",
-	"forwardPorts": [
-		8080
-	],
-	"customizations": {
-		"vscode": {
-			"extensions": [
-				"mtxr.sqltools",
-				"GitHub.vscode-pull-request-github",
-				"mtxr.sqltools-driver-sqlite",
-				"esbenp.prettier-vscode"
-			]
-		}
-	}
+  "name": "WhatTheTide",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/ruby": {},
+    "ghcr.io/devcontainers/features/docker-in-docker": {}
+  },
+  "postCreateCommand": "bash .devcontainer/scripts/postCreateCommand.sh",
+  "forwardPorts": [3000],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mtxr.sqltools",
+        "GitHub.vscode-pull-request-github",
+        "mtxr.sqltools-driver-sqlite",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
 }
