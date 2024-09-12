@@ -6,3 +6,5 @@ config/ports.json
 **.db
 
 tmp/**/*
+
+bin/**
