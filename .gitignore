@@ -8,3 +8,5 @@ config/ports.json
 tmp/**/*
 
 bin/**
+
+public/css/**/*
