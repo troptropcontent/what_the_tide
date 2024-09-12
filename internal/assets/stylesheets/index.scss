@@ -1,0 +1,31 @@
+@use "configs/fonts";
+@use "configs/variables";
+@use "configs/resets";
+
+/* Pages styles */
+
+#root {
+  height: 100vh;
+  background: linear-gradient(
+      to bottom,
+      rgba(245, 246, 252, 0.52),
+      rgba(135, 183, 255, 0.52)
+    ),
+    url(/public/images/calendar_screenshot.png) no-repeat center center fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#root > article {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-sm);
+  width: 50%;
+  height: 50%;
+  border-radius: var(--radius-lg);
+}
