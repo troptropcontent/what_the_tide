@@ -1,0 +1,30 @@
+.Flex {
+  display: flex;
+
+  &_Direction {
+    &--column {
+      flex-direction: column;
+    }
+    &--row-reverse {
+      flex-direction: row-reverse;
+    }
+  }
+
+  &_Gap {
+    &--xs {
+      gap: var(--spacing-xs);
+    }
+    &--sm {
+      gap: var(--spacing-sm);
+    }
+    &--md {
+      gap: var(--spacing-md);
+    }
+    &--lg {
+      gap: var(--spacing-lg);
+    }
+    &--xl {
+      gap: var(--spacing-xl);
+    }
+  }
+}
