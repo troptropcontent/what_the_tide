@@ -9,10 +9,33 @@
   </head>
   <body>
     <main id="root">
-      <article>
-        <h1>What The Tide</h1>
-        <p>Comming soon</p>
-      </article>
+      <form
+        hx-post="/subscription"
+        class="Flex Flex_Direction--column Flex_Gap--md"
+      >
+        <label for="email"
+          >Pour accéder au calendrier des marées du port de
+          Boucau-Bayonne/Biarritz directement dans ton agenda google, renseigne
+          l'email rattacher au compte google sur lequel tu souhaite que le
+          calendrier apparaisse.
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="whatthetide@gmail.com"
+          required
+        />
+        <input type="hidden" id="port_id" name="port_id" value="140" />
+        <div class="Flex Flex_Direction--row-reverse">
+          <button class="Button Button--color-primary">
+            <span class="Button__Text">Accéder au calendrier</span>
+            <div
+              class="Loader Loader--color-white Loader--size-sm Button__Loader"
+            ></div>
+          </button>
+        </div>
+      </form>
     </main>
   </body>
 </html>
