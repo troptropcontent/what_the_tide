@@ -1,19 +1,20 @@
 package main
 
 import (
-	"log"
 	"net/http"
+
+	"github.com/labstack/echo/v4"
 )
 
-func rootHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, "./internal/views/index.html")
+func healthCheckHandler(c echo.Context) error {
+	return c.NoContent(http.StatusOK)
 }
 
-func healthCheckHandler(w http.ResponseWriter, r *http.Request){}
-
 func main() {
-	http.Handle("/public/", http.StripPrefix("/public/", http.FileServer(http.Dir("./public"))))
-	http.HandleFunc("/up", healthCheckHandler)
-	http.HandleFunc("/", rootHandler)
-	log.Fatal(http.ListenAndServe(":3001", nil))
+	e := echo.New()
+
+	e.File("/", "internal/views/index.html")
+	e.GET("/up", healthCheckHandler)
+	e.Static("/public", "public")
+	e.Logger.Fatal(e.Start(":3001"))
 }
