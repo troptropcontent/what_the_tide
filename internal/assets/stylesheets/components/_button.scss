@@ -1,0 +1,49 @@
+.Button {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: var(--spacing-sm) var(--spacing-md);
+
+  border-radius: var(--spacing-sm);
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    filter: brightness(85%); /* Darker blue on hover */
+    transform: scale(1.05); /* Slight zoom on hover */
+  }
+
+  &:active {
+    filter: brightness(115%); /* Lighter blue when pressed */
+    transform: scale(0.98); /* Shrink a bit on click */
+  }
+
+  .htmx-request & {
+    * {
+      display: none;
+    }
+    &__Loader {
+      display: block;
+    }
+    &__Text {
+      display: none;
+    }
+  }
+  &__Loader {
+    display: none;
+  }
+
+  &--color {
+    &-primary {
+      color: var(--color-white);
+      background-color: var(--color-primary);
+
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px var(--color-primary-light); /* Focus outline */
+      }
+    }
+  }
+}

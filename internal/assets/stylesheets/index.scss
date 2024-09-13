@@ -1,8 +1,14 @@
+// Configs
 @use "configs/fonts";
 @use "configs/variables";
 @use "configs/resets";
 
-/* Pages styles */
+// Components
+@use "components/loader";
+@use "components/button";
+
+// Utilities
+@use "utilities/flex";
 
 #root {
   height: 100vh;
@@ -18,14 +24,9 @@
   align-items: center;
 }
 
-#root > article {
-  display: flex;
-  flex-direction: column;
+#root > form {
   background-color: white;
-  justify-content: center;
-  align-items: center;
-  padding: var(--spacing-sm);
+  padding: var(--spacing-lg);
   width: 50%;
-  height: 50%;
   border-radius: var(--radius-lg);
 }

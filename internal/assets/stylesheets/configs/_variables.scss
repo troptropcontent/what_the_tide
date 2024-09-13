@@ -13,4 +13,38 @@
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
+
+  /* Main Colors */
+  --color-primary: #4a90e2; /* A nice blue */
+  --color-primary-light: #77b5f7; /* Lighter version of the blue */
+  --color-primary-dark: #2d6fb1; /* Darker version of the blue */
+
+  /* Neutrals */
+  --color-white: #ffffff;
+  --color-light-gray: #f5f5f5;
+  --color-gray: #dcdcdc;
+  --color-dark-gray: #a9a9a9;
+  --color-black: #000000;
+
+  /* Accent Colors */
+  --color-accent: #ff4081; /* Pink accent for contrast */
+  --color-accent-light: #ff80ab;
+  --color-accent-dark: #c60055;
+
+  /* Backgrounds */
+  --color-background-light: #f0faff;
+  --color-background-dark: #001f33;
+
+  /* Text Colors */
+  --color-text-primary: #333333;
+  --color-text-secondary: #555555;
+  --color-text-light: #f5f5f5;
+  --color-text-on-primary: #ffffff; /* Text color on blue background */
+
+  /* Borders */
+  --color-border: #cccccc;
+  --color-border-dark: #999999;
+
+  /* Shadows */
+  --color-shadow: rgba(0, 0, 0, 0.1);
 }
