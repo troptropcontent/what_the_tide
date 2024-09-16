@@ -6,24 +6,41 @@ import (
 	"time"
 
 	tides_data_client "github.com/troptropcontent/what_the_tide/internal/lib/tides_data/client"
-	tides_data_parser "github.com/troptropcontent/what_the_tide/internal/lib/tides_data/parser"
+	ports_parser "github.com/troptropcontent/what_the_tide/internal/lib/tides_data/parser/ports"
+	tides_parser "github.com/troptropcontent/what_the_tide/internal/lib/tides_data/parser/tides"
 	"golang.org/x/net/html"
 )
 
-type ExtractFromWeb struct {
+type TidesExtractFromWeb struct {
 	Date   time.Time
 	PortId int
-	Tides  []tides_data_parser.Tide
+	Tides  []tides_parser.Tide
 }
 
-func (extract *ExtractFromWeb) Load() {
+func (extract *TidesExtractFromWeb) Load() {
 	var html_bytes []byte
-	tides_data_client.LoadWebPage(extract.Date, extract.PortId, &html_bytes)
+	tides_data_client.LoadPortWebPage(extract.Date, extract.PortId, &html_bytes)
 
 	html_document, err := html.Parse(bytes.NewReader(html_bytes))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	tides_data_parser.ExtractTidesFromHtml(html_document, &extract.Tides)
+	tides_parser.ExtractTidesFromHtml(html_document, &extract.Tides)
+}
+
+type PortsExtractFromWeb struct {
+	Ports []ports_parser.Port
+}
+
+func (extract *PortsExtractFromWeb) Load() {
+	var html_bytes []byte
+	tides_data_client.LoadPortsWebPage(&html_bytes)
+
+	html_document, err := html.Parse(bytes.NewReader(html_bytes))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ports_parser.ExtractPortsFromHtml(html_document, &extract.Ports)
 }

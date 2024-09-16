@@ -1,4 +1,4 @@
-package tides_data_parser
+package tides_data_tides_parser
 
 import (
 	"log"
@@ -176,6 +176,7 @@ func is_tide_table(n *html.Node) bool {
 }
 
 func parse_node(n *html.Node, result *[]Tide) {
+	// TODO : Here we should verify that the date of the page is the one requested
 	if is_tide_table(n) {
 		parse_tide_table(n, result)
 		return

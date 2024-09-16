@@ -1,21 +1,14 @@
 package tides_data_client
 
 import (
-	"fmt"
-	"io"
+	"log"
 	"net/http"
-	"os"
-	"time"
 )
 
-func LoadWebPage(date time.Time, port_id int, html_file *[]byte) {
-	base_url := os.Getenv("TIDE_WEBSITE_BASE_URL")
-	url := fmt.Sprintf("%v/%d?d=%s", base_url, port_id, date.Format("20060102"))
-
+func BuildRequestWithHeaders(url string) *http.Request {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		fmt.Println("Error creating request:", err)
-		return
+		log.Fatal("error during request instanciation: ", err)
 	}
 
 	// Adding headers
@@ -36,19 +29,5 @@ func LoadWebPage(date time.Time, port_id int, html_file *[]byte) {
 	req.Header.Add("sec-ch-ua-mobile", "?0")
 	req.Header.Add("sec-ch-ua-platform", `"Windows"`)
 
-	client := &http.Client{}
-	resp, err := client.Do(req)
-	if err != nil {
-		fmt.Println("Error making request:", err)
-		return
-	}
-	defer resp.Body.Close()
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		fmt.Println("Error reading response:", err)
-		return
-	}
-
-	*html_file = body
+	return req
 }
