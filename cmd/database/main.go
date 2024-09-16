@@ -46,6 +46,21 @@ func main() {
 		}
 		versionId, _, _ := m.Version()
 		log.Infof("migrations successfuly executed, database schema is now at version %d ✅", versionId)
+	case "rollback":
+		log.Info("Rolling back migrations")
+		m, err := migrate.New(
+			"file://"+db_migrations_path,
+			"sqlite://"+db_file_path,
+		)
+		if err != nil {
+			log.Fatal("error while creating the migrator instance: ", err)
+		}
+		err = m.Steps(-1)
+		if err != nil {
+			log.Fatal("error while running the migrations: ", err)
+		}
+		versionId, _, _ := m.Version()
+		log.Infof("migrations successfuly rolleback, database schema is now at version %d ✅", versionId)
 	case "create_migration":
 		log.Info("Creating new migration files")
 		createMigrationCmd.Parse(os.Args[2:])
