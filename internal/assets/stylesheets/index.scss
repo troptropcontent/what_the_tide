@@ -30,3 +30,15 @@
   width: 50%;
   border-radius: var(--radius-lg);
 }
+
+#root > .subscription-created {
+  background-color: white;
+  padding: var(--spacing-lg);
+  width: 50%;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  & > p {
+    text-align: center;
+  }
+}
