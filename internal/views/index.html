@@ -1,3 +1,4 @@
+{{define "root"}}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,14 +11,12 @@
   <body>
     <main id="root">
       <form
-        hx-post="/subscription"
+        hx-post="/agenda/subscription"
         hx-swap="outerHTML"
         class="Flex Flex_Direction--column Flex_Gap--md"
       >
         <label for="email"
-          >Pour accéder au calendrier des marées du port de
-          Boucau-Bayonne/Biarritz directement dans ton agenda google, renseigne
-          l'email rattacher au compte google sur lequel tu souhaite que le
+          >Eemail rattacher au compte google sur lequel vous souhaitez que le
           calendrier apparaisse.
         </label>
         <input
@@ -27,7 +26,15 @@
           placeholder="whatthetide@gmail.com"
           required
         />
-        <input type="hidden" id="port_id" name="port_id" value="140" />
+        <label for="port_id"
+          >Port pour lequel vous souhaitez recevoir les marées</label
+        >
+        <select name="port_id" id="port_id" required>
+          <option value="">--Veuillez choisir un port--</option>
+          {{range .}}
+          <option value="{{.ID}}">{{.Name}}</option>
+          {{end}}
+        </select>
         <div class="Flex Flex_Direction--row-reverse">
           <button class="Button Button--color-primary">
             <span class="Button__Text">Accéder au calendrier</span>
@@ -40,3 +47,4 @@
     </main>
   </body>
 </html>
+{{end}}
