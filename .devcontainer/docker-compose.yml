@@ -17,3 +17,11 @@ services:
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
+  worker:
+    image: contribsys/faktory
+    env_file:
+      # Ensure that the variables in .env match the same variables in devcontainer.json
+      - ../.env
+    ports:
+      - "7419:7419"
+      - "7420:7420"

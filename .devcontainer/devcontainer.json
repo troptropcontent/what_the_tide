@@ -11,6 +11,7 @@
     "ghcr.io/devcontainers/features/docker-in-docker": {}
   },
   "postCreateCommand": "bash .devcontainer/scripts/postCreateCommand.sh",
+  "forwardPorts": ["7420:7420", "7419:7419"],
   "customizations": {
     "vscode": {
       "extensions": [
