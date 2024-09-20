@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/troptropcontent/what_the_tide/database"
 	"github.com/troptropcontent/what_the_tide/internal/models"
-	"github.com/troptropcontent/what_the_tide/internal/modules/agenda"
+	agenda_handlers "github.com/troptropcontent/what_the_tide/internal/modules/agenda/handlers"
 )
 
 func healthCheckHandler(c echo.Context) error {
@@ -35,6 +35,7 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 }
 
 func main() {
+	// Initialize the database
 	database.MustInit()
 
 	t := &Template{
@@ -48,7 +49,7 @@ func main() {
 	e.Static("/public", "public")
 
 	agendaRoutes := e.Group("/agenda")
-	agendaRoutes.POST("/subscription", agenda.CreateSubscriptionHandler)
+	agendaRoutes.POST("/subscription", agenda_handlers.CreateSubscription)
 
 	e.Logger.Fatal(e.Start(":3001"))
 }
