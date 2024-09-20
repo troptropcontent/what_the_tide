@@ -17,6 +17,8 @@ require (
 	cloud.google.com/go/auth v0.9.3 // indirect
 	cloud.google.com/go/auth/oauth2adapt v0.2.4 // indirect
 	cloud.google.com/go/compute/metadata v0.5.0 // indirect
+	github.com/contribsys/faktory v1.8.0 // indirect
+	github.com/contribsys/faktory_worker_go v1.7.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
