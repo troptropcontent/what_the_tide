@@ -1,4 +1,4 @@
-package agenda
+package agenda_models
 
 const ThresholdAgendaType = "treshold"
 
