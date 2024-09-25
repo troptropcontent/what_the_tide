@@ -6,5 +6,5 @@ CREATE TABLE IF NOT EXISTS calendars (
     type varchar NOT NULL,
     name varchar NOT NULL,
     external_id varchar,
-    is_pulished boolean
+    is_published boolean
 )
