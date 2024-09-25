@@ -7,7 +7,7 @@
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {},
-    "ghcr.io/devcontainers/features/ruby": {},
+    "ghcr.io/devcontainers/features/ruby": {"version": "3.3.5"},
     "ghcr.io/devcontainers/features/docker-in-docker": {}
   },
   "postCreateCommand": "bash .devcontainer/scripts/postCreateCommand.sh",
