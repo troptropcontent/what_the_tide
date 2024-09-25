@@ -4,11 +4,13 @@
       "previewLimit": 50,
       "driver": "SQLite",
       "name": "what_the_tide",
-      "database": "${workspaceFolder:what_the_tide}/database/database.db"
+      "database": "${workspaceFolder:what_the_tide}/database/database_development.db"
     }
   ],
   "sqltools.useNodeRuntime": true,
   "go.testEnvVars": {
     "WHAT_THE_TIDE_ENV": "test"
-  }
+  },
+  "testing.showAllMessages": true,
+  "go.testFlags": ["-v"]
 }
