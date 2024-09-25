@@ -4,19 +4,19 @@ import (
 	"gorm.io/gorm"
 )
 
-const BasicAgendaType = "basic"
+const BasicCalendarType = "basic"
 
-type BasicAgendaConfiguration struct {
+type BasicCalendarConfiguration struct {
 	gorm.Model
 	CalendarID uint
 	PortID     int
 }
 
-type BasicAgenda struct {
+type BasicCalendar struct {
 	Base
-	Configuration BasicAgendaConfiguration `gorm:"foreignKey:UserName"`
+	Configuration BasicCalendarConfiguration `gorm:"foreignKey:CalendarID"`
 }
 
-func NewBasicAgenda() *BasicAgenda {
-	return &BasicAgenda{Base: Base{Type: BasicAgendaType}}
+func NewBasicCalendar() *BasicCalendar {
+	return &BasicCalendar{Base: Base{Type: BasicCalendarType}}
 }

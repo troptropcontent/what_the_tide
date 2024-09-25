@@ -4,16 +4,16 @@ import "gorm.io/gorm"
 
 type Subscription struct {
 	gorm.Model
-	AgendaId   uint
+	CalendarID uint
 	Email      string
 	Published  bool
 	ExternalId *string
 }
 
-func NewSubscription(agendaId uint, email string) *Subscription {
+func NewSubscription(calendarID uint, email string) *Subscription {
 	return &Subscription{
-		AgendaId:  agendaId,
-		Email:     email,
-		Published: false,
+		CalendarID: calendarID,
+		Email:      email,
+		Published:  false,
 	}
 }

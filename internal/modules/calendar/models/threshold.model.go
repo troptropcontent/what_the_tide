@@ -1,18 +1,19 @@
 package calendar_models
 
-const ThresholdAgendaType = "treshold"
+const ThresholdCalendarType = "treshold"
 
-type ThresholdAgendaConfiguration struct {
-	PortID  int
-	Maximum int
-	Minimum int
+type ThresholdCalendarConfiguration struct {
+	PortID     int
+	Maximum    int
+	Minimum    int
+	CalendarID uint
 }
 
-type ThresholdAgenda struct {
+type ThresholdCalendar struct {
 	Base
-	Configuration ThresholdAgendaConfiguration
+	Configuration ThresholdCalendarConfiguration
 }
 
-func NewThresholdAgenda() *ThresholdAgenda {
-	return &ThresholdAgenda{Base: Base{Type: ThresholdAgendaType}}
+func NewThresholdCalendar() *ThresholdCalendar {
+	return &ThresholdCalendar{Base: Base{Type: ThresholdCalendarType}}
 }
