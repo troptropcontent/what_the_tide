@@ -11,6 +11,7 @@ import (
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/labstack/gommon/log"
 	"github.com/troptropcontent/what_the_tide/config"
+	"github.com/troptropcontent/what_the_tide/database"
 )
 
 func main() {
@@ -35,7 +36,7 @@ func main() {
 		log.Info("Running database migrations")
 		m, err := migrate.New(
 			"file://"+db_migrations_path,
-			"sqlite://"+db_file_path,
+			"sqlite://"+database.DbPath(),
 		)
 		if err != nil {
 			log.Fatal("error while creating the migrator instance: ", err)
@@ -50,7 +51,7 @@ func main() {
 		log.Info("Rolling back migrations")
 		m, err := migrate.New(
 			"file://"+db_migrations_path,
-			"sqlite://"+db_file_path,
+			"sqlite://"+database.DbPath(),
 		)
 		if err != nil {
 			log.Fatal("error while creating the migrator instance: ", err)
@@ -80,7 +81,7 @@ func main() {
 	case "force":
 		m, err := migrate.New(
 			"file://"+db_migrations_path,
-			"sqlite://"+db_file_path,
+			"sqlite://"+database.DbPath(),
 		)
 		if err != nil {
 			log.Fatalf("error creating migrator instance: ", err)
