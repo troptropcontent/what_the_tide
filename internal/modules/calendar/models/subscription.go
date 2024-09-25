@@ -1,4 +1,4 @@
-package agenda_models
+package calendar_models
 
 import "gorm.io/gorm"
 

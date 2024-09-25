@@ -1,1 +1,0 @@
-DROP TABLE IF EXISTS basic_agenda_configurations

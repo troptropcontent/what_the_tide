@@ -5,32 +5,28 @@ import (
 
 	faktory "github.com/contribsys/faktory/client"
 	faktoryWorker "github.com/contribsys/faktory_worker_go"
-	agenda_jobs "github.com/troptropcontent/what_the_tide/internal/modules/agenda/jobs"
+	calendar_jobs "github.com/troptropcontent/what_the_tide/internal/modules/calendar/jobs"
 )
 
-type Job struct {
-	Name     string
-	Function func(ctx context.Context, args ...interface{}) error
+type Job interface {
+	Name() string
+	Perform(ctx context.Context, args ...interface{}) error
 }
 
-func NewJob(name string, function func(ctx context.Context, args ...interface{}) error) Job {
-	return Job{Name: name, Function: function}
-}
-
-func Push(name string, args ...interface{}) error {
+func Push(j Job, args ...interface{}) error {
 	client, _ := faktory.Open()
-	job := faktory.NewJob(name, args)
+	job := faktory.NewJob(j.Name(), args)
 	return client.Push(job)
 }
 
 var Jobs = []Job{
-	NewJob("SubscribeToAlreadyExistingAgenda", agenda_jobs.SubscribeToAlreadyExistingAgenda),
+	&calendar_jobs.SubscribeToAlreadyExistingAgendaJob{},
 }
 
 func NewBackGroundWorker() (manager *faktoryWorker.Manager) {
 	manager = faktoryWorker.NewManager()
 	for _, job := range Jobs {
-		manager.Register(job.Name, job.Function)
+		manager.Register(job.Name(), job.Perform)
 	}
 	return manager
 }

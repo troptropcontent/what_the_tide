@@ -4,6 +4,6 @@ CREATE TABLE IF NOT EXISTS events (
     updated_at datetime NOT NULL,
     deleted_at datetime,
     name varchar,
-    agenda_id INTEGER NOT NULL,
-    FOREIGN KEY(agenda_id) REFERENCES agendas(id)
+    calendar_id INTEGER NOT NULL,
+    FOREIGN KEY(calendar_id) REFERENCES calendars(id)
 )

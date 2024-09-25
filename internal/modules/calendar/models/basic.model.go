@@ -1,4 +1,4 @@
-package agenda_models
+package calendar_models
 
 import (
 	"gorm.io/gorm"
@@ -8,12 +8,13 @@ const BasicAgendaType = "basic"
 
 type BasicAgendaConfiguration struct {
 	gorm.Model
-	PortID int
+	CalendarID uint
+	PortID     int
 }
 
 type BasicAgenda struct {
 	Base
-	Configuration BasicAgendaConfiguration
+	Configuration BasicAgendaConfiguration `gorm:"foreignKey:UserName"`
 }
 
 func NewBasicAgenda() *BasicAgenda {

@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/troptropcontent/what_the_tide/database"
 	"github.com/troptropcontent/what_the_tide/internal/models"
-	agenda_handlers "github.com/troptropcontent/what_the_tide/internal/modules/agenda/handlers"
+	calendar_handlers "github.com/troptropcontent/what_the_tide/internal/modules/calendar/handlers"
 )
 
 func healthCheckHandler(c echo.Context) error {
@@ -49,7 +49,7 @@ func main() {
 	e.Static("/public", "public")
 
 	agendaRoutes := e.Group("/agenda")
-	agendaRoutes.POST("/subscription", agenda_handlers.CreateSubscription)
+	agendaRoutes.POST("/subscription", calendar_handlers.CreateSubscription)
 
 	e.Logger.Fatal(e.Start(":3001"))
 }

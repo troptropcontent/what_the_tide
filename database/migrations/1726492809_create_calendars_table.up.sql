@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS agendas (
+CREATE TABLE IF NOT EXISTS calendars (
     id INTEGER PRIMARY KEY,
     created_at datetime NOT NULL,
     updated_at datetime NOT NULL,

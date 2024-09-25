@@ -1,4 +1,4 @@
-package agenda_models
+package calendar_models
 
 import "gorm.io/gorm"
 
@@ -11,5 +11,5 @@ type Base struct {
 }
 
 func (a *Base) TableName() string {
-	return "agendas"
+	return "calendars"
 }
