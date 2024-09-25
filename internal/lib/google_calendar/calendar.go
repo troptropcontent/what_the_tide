@@ -32,15 +32,12 @@ func CalendarCreate(service *calendar.Service, name string, description string) 
 	return request.Do()
 }
 
-func CalendarShareWith(service *calendar.Service, calendarId string, email string) error {
-	aclRule := calendar.AclRule{
+func CalendarShareWith(service *calendar.Service, calendarId string, email string) (aclRule *calendar.AclRule, err error) {
+	return service.Acl.Insert(calendarId, &calendar.AclRule{
 		Scope: &calendar.AclRuleScope{
 			Type:  "user",
 			Value: email,
 		},
 		Role: "reader",
-	}
-	_, err := service.Acl.Insert(calendarId, &aclRule).Do()
-
-	return err
+	}).Do()
 }
